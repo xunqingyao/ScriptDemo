@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    username: qingyao
+    password: Liangkaixin1010
+    url: jdbc:mysql://rm-2ze935axdc9v74c3ono.mysql.rds.aliyuncs.com:3306/qingyao_script
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true

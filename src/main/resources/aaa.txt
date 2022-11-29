@@ -1,0 +1,50 @@
+Step welcome
+ Speak $user_name + "您好，请问有什么可以帮您?"
+ Default businessProc
+Step businessProc
+ Speak "请问您要办理什么服务？"
+ Listen 5 50
+ Silence silenceProc
+ Branch "投诉" complainProc
+ Branch "账单" billProc
+ Branch "余额" balanceProc
+ Branch "退出" thanksProc
+ Default ExceptionProc
+Step complainProc
+ Speak "您的意见是我们改进工作的动力，感谢您宝贵的意见"
+ Listen 5 50
+ Default exitOrContinueProc
+Step billProc
+ Input id
+ Query ("bill",&id)
+ Speak "您的本月账单是支出" + $bill_out_times + "笔,共计" + $bill_out_money + "元,充值ֵ" + $bill_in_times + "笔,共计" + $bill_in_money + "元"
+ Default exitOrContinueProc
+Step balanceProc
+ Input id
+ Query ("amount",&id)
+ Speak "您当前的余额为" + $balance + "元"
+ Default exitOrContinueProc
+Step silenceProc
+ Speak "听不清，请您大声一点可以吗"
+ Listen 5 50
+ Branch "投诉" complainProc
+ Branch "账单" billProc
+ Branch "余额" balanceProc
+ Branch "退出" thanksProc
+ Default ExceptionProc
+ Silence nonResponseProc
+Step exitOrContinueProc
+ Speak "如需办理其他业务请输入继续，退出请输入退出"
+ Listen 5 50
+ Branch "继续" businessProc
+ Branch "退出" thanksProc
+ Default ExceptionProc
+Step nonResponseProc
+ Speak "由于长时间挂机，连接已断开"
+ Default thanksProc
+Step ExceptionProc
+ Speak "您好，这个问题我不太清楚，请问还有其他问题吗？"
+ Default businessProc
+Step thanksProc
+ Speak "感谢您的来电，再见"
+ Exit

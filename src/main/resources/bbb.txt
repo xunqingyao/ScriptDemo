@@ -1,0 +1,26 @@
+Step welcome
+ Speak $user_name + "您好，请问有什么可以帮您?"
+ Default businessProc
+Step businessProc
+ Speak "请问您要办理什么服务？"
+ Listen 5 50
+ Branch "查询" searchProc
+ Branch "退出" thanksProc
+ Default ExceptionProc
+Step searchProc
+ Input websiteName
+ Query ("website",$website)
+ Speak "您要查询的网站是" + $ip
+ Default exitOrContinueProc
+Step exitOrContinueProc
+ Speak "如需办理其他业务请输入，退出请输入退出"
+ Listen 5 50
+ Branch "查询" searchProc
+ Branch "退出" thanksProc
+ Default ExceptionProc
+Step ExceptionProc
+ Speak "您好，这个问题我不太清楚，请问还有其他问题吗？"
+ Default businessProc
+Step thanksProc
+ Speak "感谢您的来电，再见"
+ Exit
